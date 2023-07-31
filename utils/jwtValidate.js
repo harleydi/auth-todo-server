@@ -4,8 +4,10 @@ const jwtValidate = async (req, res, next) => {
     try {
         if (req.headers && req.headers.authorization) {
             let token = req.headers.authorization
+            console.log(token)
             let slicedToken = token.split(' ')[1]
             let decodedToken = await jwt.verify(slicedToken, process.env.SECRET_KEY) // Checks if the token is valid
+            
             // decodedToken= payload(any information passed in), created time and expiration time
             if (decodedToken) {
                 res.locals.decodedToken = decodedToken

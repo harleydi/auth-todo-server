@@ -5,6 +5,7 @@ const getAllTodos = async (req, res) => {
     try {
         const user = res.locals.decodedToken.userId
         const allTodos = await Todo.find({ owner: user })
+        res.status(200).json({ success: true, data: allTodos })
     } catch (error) {
         console.log(error)
         res.status(500).json({ success: false, message: "error", error: error })
